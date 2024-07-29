@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { API_URL } from '../../constants';
 import { Link } from 'react-router-dom';
+import { fetchAllPosts, deletePost } from '../../services/postService';
 
 function PostsList() {
     const [posts, setPosts] = useState([]);
@@ -10,35 +10,21 @@ function PostsList() {
     useEffect(() => {
         async function loadPosts() {
             try {
-                const response = await fetch(API_URL);
-                if (response.ok) {
-                    const json = await response.json();
-                    setPosts(json);
-                } else {
-                    throw response;
-                }
+                const data = await fetchAllPosts();
+                setPosts(data);
+                setLoading(false);
             } catch (error) {
-                setError("An error occured...");
-                console.log("An error occured: ", error);
-            } finally {
+                setError(error);
                 setLoading(false);
             }
         }
-
         loadPosts();
     }, []);
 
-    const deletePost = async (id) => {
+    const deletePostHandler = async (id) => {
         try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE",
-            });
-
-            if(response.ok) {
-                setPosts(posts.filter((post) => post.id !== id));
-            } else {
-                throw response;
-            }
+            await deletePost(id);
+            setPosts(posts.filter((post) => post.id !== id));
         } catch (error) {
             console.error(error);
         }
@@ -49,7 +35,7 @@ function PostsList() {
             {posts.map((post) => (
                 <div key={post.id} className="postContainer">
                     <h2>
-                        <Link to={`/posts/${post.id}`}>
+                        <Link to={`/posts/${post.id}`} className="post-title">
                             {post.title}
                         </Link>
                     </h2>
@@ -58,7 +44,7 @@ function PostsList() {
                     <div className="posts-links">
                         <Link to={`/posts/${post.id}/edit`}>Edit Post</Link>
                         {" | "}
-                        <button onClick={() => deletePost(post.id)}>Delete Post</button>
+                        <button onClick={() => deletePostHandler(post.id)}>Delete Post</button>
                     </div>
                 </div>
             ))}

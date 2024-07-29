@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPost, updatePost } from "../../services/postService";
+import PostForm from "./PostForm";
 
 function PostEditForm() {
   const [post, setPost] = useState(null);
   const { id } = useParams();
-  const [, setLoading] = useState(true);
-  const [, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,24 +15,15 @@ function PostEditForm() {
         setPost(json);
       } catch (e) {
         setError(e);
-      } finally {
-        setLoading(false);
       }
     };
     fetchCurrentPost();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const postData = {
-      title: post.title,
-      body: post.body,
-    }
-
+  const handleUpdateSubmit = async (formData) => {
     try {
-      const response = await updatePost(id, postData);
-      navigate(`/posts/${response.id}`);
+      await updatePost(id, formData);
+      navigate(`/posts/${id}`);
     } catch (e) {
       console.log("An error occurred:", e);
     }
@@ -42,34 +32,12 @@ function PostEditForm() {
   if (!post) return <h2>Loading...</h2>;
 
   return (
-    <div>
-      <h2>Edit Post</h2>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="post-title">Title: </label>
-          <br />
-          <input
-            type="text"
-            id="post-title"
-            value={post.title}
-            onChange={(e) => setPost({ ...post, title: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="post-body">Body: </label>
-          <br />
-          <textarea
-            id="post-body"
-            value={post.body}
-            onChange={(e) => setPost({ ...post, body: e.target.value })}
-          />
-        </div>
-        <div>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-    </div>
+    <PostForm 
+      post={post}
+      onSubmit={handleUpdateSubmit}
+      headerText="Edit Post"
+      buttonText="Edit Post"
+    />
   );
 }
 

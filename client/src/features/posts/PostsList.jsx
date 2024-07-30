@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAllPosts, deletePost } from '../../services/postService';
+import "./PostStyles.css";
 
 function PostsList() {
     const [posts, setPosts] = useState([]);
@@ -40,7 +41,10 @@ function PostsList() {
                         </Link>
                     </h2>
                     <p>{post.body}</p>
-
+                    <div>{post.image_url && (
+                        <img src={post.image_url} alt={post.title} className="post-image" />
+                    )}
+                    </div>
                     <div className="posts-links">
                         <Link to={`/posts/${post.id}/edit`}>Edit Post</Link>
                         {" | "}

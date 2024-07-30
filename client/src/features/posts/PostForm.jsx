@@ -6,6 +6,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
     post || {
       title: "",
       body: "",
+      image: "",
     }
   );
 
@@ -43,6 +44,20 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
                 body: e.target.value,
               })
             }
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <input 
+            id="image" 
+            type="file" 
+            accept="image/*" 
+            onChange={(e) => {
+              setFormData ({
+                ...formData, 
+                image: e.target.files[0], 
+              })
+            }} 
           />
         </div>
         <div>

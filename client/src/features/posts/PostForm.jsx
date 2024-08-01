@@ -25,6 +25,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
             id="title"
             type="text"
             value={formData.title}
+            required
             onChange={(e) =>
               setFormData({
                 ...formData,

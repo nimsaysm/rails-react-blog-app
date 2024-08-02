@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { deletePost } from "../../services/postService";
-import "./PostStyles.css";
 import SearchBar from "./SearchBar";
 import usePostsData from "../../hooks/usePostsData";
 import useURLSearchParam from "../../hooks/useURLSearchParam";
 import Pagination from "./Pagination";
+import "../../assets/styles/PostStyles.css";
 
 function PostsList() {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -79,10 +79,9 @@ function PostsList() {
 			/>
 
 			{loading && <p>Loading...</p>}
-			{error && <p>Error loading posts.</p>}
-
+			
 			{posts.map((post) => (
-				<div key={post.id} className="postContainer">
+				<div key={post.id} className="post-container">
 					<h2>
 						<Link to={`/posts/${post.id}`} className="post-title">
 							{post.title}

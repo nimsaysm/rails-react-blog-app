@@ -1,5 +1,6 @@
 import React, { useRef } from "react"; // useRef: hold values between renderings
 import PropTypes from "prop-types";
+import "../../assets/styles/SearchBar.css";
 
 function SearchBar({ value, onSearchChange, onImmediateChange }) {
 	const searchDebounceRef = useRef(null);
@@ -25,6 +26,7 @@ function SearchBar({ value, onSearchChange, onImmediateChange }) {
 	return (
 		<div>
 			<input
+				className="search-bar"
 				type="text"
 				placeholder="Search..."
 				value={value}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "../../assets/styles/PostForm.css"
 
 // receives the props of the components that call it
 function PostForm({ post, headerText, onSubmit, buttonText }) {
@@ -13,7 +14,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
   );
 
   return (
-    <div>
+    <div className="post-form">
       <h2>{headerText}</h2>
       <form
         onSubmit={(e) => {
@@ -21,7 +22,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
           onSubmit(formData); // function received by props
         }}
       >
-        <div>
+        <div className="post-input">
           <label htmlFor="title">Title:</label>
           <input
             id="title"
@@ -36,7 +37,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
             }
           />
         </div>
-        <div>
+        <div className="post-input">
           <label htmlFor="body">Body:</label>
           <textarea
             id="body"
@@ -49,7 +50,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
             }
           />
         </div>
-        <div>
+        <div className="post-input">
           <label htmlFor="image">Image:</label>
           <input 
             id="image" 

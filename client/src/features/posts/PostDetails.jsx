@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { deletePost, fetchPost } from "../../services/postService";
-import "./PostStyles.css";
+import "../../assets/styles/PostStyles.css";
 
 function PostDetails() {
   const [post, setPost] = useState(null);

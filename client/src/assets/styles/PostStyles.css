@@ -1,0 +1,28 @@
+.post-container {
+    margin: 2rem;
+    padding: 1rem;
+    width: 30rem;
+    background-color: rgba(255, 255, 255, 0.87);
+    color: #242424;
+    border-radius: 2rem;
+}
+
+.post-image {
+    width: 20rem;
+    height: auto;
+    border-radius: 2rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.post-container a {
+    color: #538bf2;
+}
+
+.post-container a:hover{
+    color: #3779f4;
+}
+
+.post-container button {
+    background-color: rgba(198, 198, 198, 0.87);
+    color: #242424;
+}

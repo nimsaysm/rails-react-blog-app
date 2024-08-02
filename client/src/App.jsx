@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import PostsList from './features/posts/PostsList';
 import NavBar from './components/NavBar';
 import AppRoutes from './components/AppRoutes';
 

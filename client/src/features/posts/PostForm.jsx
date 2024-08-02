@@ -1,8 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
+// receives the props of the components that call it
 function PostForm({ post, headerText, onSubmit, buttonText }) {
   const [formData, setFormData] = useState(
+    // will use the existing post (edit context) or empty fields 
     post || {
       title: "",
       body: "",
@@ -16,7 +18,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit(formData);
+          onSubmit(formData); // function received by props
         }}
       >
         <div>
@@ -69,6 +71,7 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
   );
 }
 
+// expected props and their types
 PostForm.propTypes = {
   post: PropTypes.shape({
     title: PropTypes.string.isRequired,

@@ -4,10 +4,15 @@ class Api::V1::PostsController < ApplicationController
   # GET /posts
   def index
     posts_per_page = 2
+
+    # show descending posts 
     @posts = Post.order(created_at: :desc)
+
     posts_with_images = paginate_posts(@posts, posts_per_page)
     total_posts_count = Post.count
 
+    # information used to help with pagination
+    # return a json response for the client
     render json: {
       posts: posts_with_images, 
       total_count: total_posts_count,
@@ -29,6 +34,9 @@ class Api::V1::PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
+      # returns a json response containing the data of the post object
+      # status created = HTTP status 201, location: includes header in
+      # HTTP response indicating the URL where access the new resource
       render json: @post, status: :created, location: api_v1_post_url(@post)
     else
       render json: @post.errors, status: :unprocessable_entity

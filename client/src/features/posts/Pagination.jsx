@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 function Pagination({ currentPage, totalPosts, postsPerPage, onPageChange }) {
+	// calculate the number of posts with the division and rounds up(ceil function)
 	const totalPages = Math.ceil(totalPosts / postsPerPage);
 
 	const handlePrevious = () => {
@@ -16,10 +17,14 @@ function Pagination({ currentPage, totalPosts, postsPerPage, onPageChange }) {
 	};
 
 	const getVisiblePageNumbers = () => {
+		// return numbers to be visible and when add "..." (ellipsis)
+
+		// prev 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 next 
 		if (totalPages <= 10) {
 			return createRange(1, totalPages);
 		}
 
+		// prev 1, 2, 3, 4, 5, 6, 7, 8, ..., 50 next 
 		if (currentPage <= 6) {
 			const lastPageBeforeEllipsis = 8;
 			return [...createRange(1, lastPageBeforeEllipsis), "...", totalPages];
@@ -57,7 +62,7 @@ function Pagination({ currentPage, totalPosts, postsPerPage, onPageChange }) {
 						disabled={currentPage === page}>
 						{page}
 					</button>
-				) : (
+				) : ( // will show a ellipsis when the number is not visible
 					<span key={`ellipsis-${index}`} style={{ margin: "0 5px" }}>
 						{page}
 					</span>

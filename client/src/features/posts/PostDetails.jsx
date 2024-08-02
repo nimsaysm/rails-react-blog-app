@@ -11,7 +11,9 @@ function PostDetails() {
   useEffect(() => {
     const fetchCurrentPost = async () => {
       try {
+        // search post by id
         const json = await fetchPost(id);
+        // set the current post
         setPost(json);
       } catch (e) {
         console.log("An error occurred:", e);
@@ -23,12 +25,14 @@ function PostDetails() {
   const deletePostHandler = async () => {
     try {
       await deletePost(post.id);
+      // after delete go to "/"
       navigate("/");
     } catch (error) {
         console.error(error);
     }
   }
 
+  // if there is not a post will return Loading - while useEffect run
   if (!post) return <h2>Loading...</h2>;
 
   return (
@@ -39,7 +43,7 @@ function PostDetails() {
         <img src={post.image_url} alt={post.title} className="post-image" />
         )}
       </div>
-      <div>
+      <div className="posts-links">
         <Link to={`/posts/${id}/edit`}>Edit</Link>
         {" | "}
         <button onClick={deletePostHandler}>Delete</button>

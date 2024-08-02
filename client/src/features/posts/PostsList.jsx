@@ -13,10 +13,11 @@ function PostsList() {
 		useURLSearchParam("search");
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const initialPageFromURL = Number(searchParams.get("page") || "1");
-	const [currentPage, setCurrentPage] = useState(initialPageFromURL);
+	// gets current page from URL or uses 1
+	const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page") || "1"));
 
 	const [posts, setPosts] = useState([]);
+	
 	const {
 		posts: fetchedPosts,
 		totalPosts: totalPosts,
@@ -26,12 +27,12 @@ function PostsList() {
 	} = usePostsData(debouncedSearchTerm, currentPage);
 
 	useEffect(() => {
-		if (fetchedPosts) {
-			setPosts(fetchedPosts);
+		if (fetchedPosts) { // if posts have been set by usePostsData 
+			setPosts(fetchedPosts); //set posts with data.posts
 		}
 	}, [fetchedPosts]);
 
-	useEffect(() => {
+	useEffect(() => { //will repeat when searchParams change
 		const initialSearchTerm = searchParams.get("search") || "";
 		setSearchTerm(initialSearchTerm);
 
@@ -42,6 +43,7 @@ function PostsList() {
 	const deletePostHandler = async (id) => {
 		try {
 			await deletePost(id);
+			// set posts filtering all the posts except the one with the id
 			setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
 		} catch (error) {
 			console.error(error);

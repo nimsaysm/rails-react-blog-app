@@ -2,6 +2,7 @@ class Api::V1::SearchController < ApplicationController
   def posts
     posts_per_page = 2
 
+    # search for posts that containing the query (q)
     @posts = Post.where('title LIKE ? OR body LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%").order(created_at: :desc)
     
     posts_with_images = paginate_posts(@posts, posts_per_page)

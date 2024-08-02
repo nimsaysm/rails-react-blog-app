@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      # /api/v1/search/posts
       get 'search/posts'
+      # /api/v1/search/posts/...
       resources :posts
     end
   end

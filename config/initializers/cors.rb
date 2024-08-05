@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # * -> accept all requests
-    origins "*" #accept only vite URL requests
+    origins "*" 
 
     resource "*",
       headers: :any,

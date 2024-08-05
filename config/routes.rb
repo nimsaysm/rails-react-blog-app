@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # /api/v1/search/posts
       get 'search/posts'
-      # /api/v1/search/posts/...
+      # /api/v1/posts/...
       resources :posts
     end
   end

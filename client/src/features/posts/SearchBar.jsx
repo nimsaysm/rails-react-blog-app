@@ -26,6 +26,7 @@ function SearchBar({ value, onSearchChange, onImmediateChange }) {
 	return (
 		<div>
 			<input
+				aria-label="Search"
 				className="search-bar"
 				type="text"
 				placeholder="Search..."

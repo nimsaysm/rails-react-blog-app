@@ -17,7 +17,7 @@ function usePostsData(searchTerm, page = 1) {
                     // if there is a search term, will use searchPosts()
                     data = await searchPosts(searchTerm, page);
                 } else {
-                    // if there is not a searcch term, will fetch all posts according to the page
+                    // if there is not a search term, will fetch all posts according to the page
                     data = await fetchAllPosts(page);
                 }
 
@@ -28,10 +28,10 @@ function usePostsData(searchTerm, page = 1) {
                     setPerPage(data.per_page);
                 }
                 setLoading(false);
-            } catch(e) {
-                setError(e);
+            } catch(error) {
+                setError(error);
                 setLoading(false);
-                console.error(e);
+                console.error("An error occurred: ", error);
             }
         }
         loadPosts();

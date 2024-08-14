@@ -14,8 +14,8 @@ function PostEditForm() {
       try {
         const json = await fetchPost(id); // search post by id in URL
         setPost(json);
-      } catch (e) {
-        setError(e);
+      } catch (error) {
+        console.error("An error occurred: ", error);
       }
     };
     fetchCurrentPost();
@@ -35,8 +35,8 @@ function PostEditForm() {
       await updatePost(id, formData);
       // after the update, redirect to "/posts/{id updated post}"
       navigate(`/posts/${id}`);
-    } catch (e) {
-      console.log("An error occurred:", e);
+    } catch (error) {
+      console.log("An error occurred: ", error);
     }
   };
 
@@ -48,7 +48,7 @@ function PostEditForm() {
       post={post}
       onSubmit={handleUpdateSubmit}
       headerText="Edit Post"
-      buttonText="Edit Post"
+      buttonText="Update Post"
     />
   );
 }

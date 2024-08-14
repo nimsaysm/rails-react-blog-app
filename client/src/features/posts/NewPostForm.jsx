@@ -18,7 +18,7 @@ function NewPostForm() {
             // after create, will redirect to "/posts/{new post id}"
             navigate(`/posts/${response.id}`);
         } catch (error) {
-            console.error(e);
+            console.error("Failed to create post. ", error);
         }
     }
 

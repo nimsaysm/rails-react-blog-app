@@ -76,7 +76,8 @@ function PostForm({ post, headerText, onSubmit, buttonText }) {
 PostForm.propTypes = {
   post: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
+    body: PropTypes.string,
+    image: PropTypes.any,
   }),
   headerText: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,

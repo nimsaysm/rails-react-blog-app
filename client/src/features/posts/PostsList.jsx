@@ -14,10 +14,12 @@ function PostsList() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	// gets current page from URL or uses 1
-	const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page") || "1"));
+	const [currentPage, setCurrentPage] = useState(
+		Number(searchParams.get("page") || "1")
+	);
 
 	const [posts, setPosts] = useState([]);
-	
+
 	const {
 		posts: fetchedPosts,
 		totalPosts: totalPosts,
@@ -27,12 +29,14 @@ function PostsList() {
 	} = usePostsData(debouncedSearchTerm, currentPage);
 
 	useEffect(() => {
-		if (fetchedPosts) { // if posts have been set by usePostsData 
+		if (fetchedPosts) {
+			// if posts have been set by usePostsData
 			setPosts(fetchedPosts); //set posts with data.posts
 		}
 	}, [fetchedPosts]);
 
-	useEffect(() => { //will repeat when searchParams change
+	useEffect(() => {
+		//will repeat when searchParams change
 		const initialSearchTerm = searchParams.get("search") || "";
 		setSearchTerm(initialSearchTerm);
 
@@ -46,7 +50,7 @@ function PostsList() {
 			// set posts filtering all the posts except the one with the id
 			setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
 		} catch (error) {
-			console.error(error);
+			console.error("An error occurred: ", error);
 		}
 	};
 
@@ -58,7 +62,7 @@ function PostsList() {
 		setDebouncedSearchTerm(searchValue);
 	};
 
-    const handlePageChange = (page) => {
+	const handlePageChange = (page) => {
 		setCurrentPage(page);
 		setSearchParams({ search: debouncedSearchTerm, page: page });
 	};
@@ -79,7 +83,7 @@ function PostsList() {
 			/>
 
 			{loading && <p>Loading...</p>}
-			
+
 			{posts.map((post) => (
 				<div key={post.id} className="post-container">
 					<h2>

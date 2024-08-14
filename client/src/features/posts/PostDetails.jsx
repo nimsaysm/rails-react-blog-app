@@ -15,8 +15,8 @@ function PostDetails() {
         const json = await fetchPost(id);
         // set the current post
         setPost(json);
-      } catch (e) {
-        console.log("An error occurred:", e);
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
     };
     fetchCurrentPost();
@@ -28,7 +28,7 @@ function PostDetails() {
       // after delete go to "/"
       navigate("/");
     } catch (error) {
-        console.error(error);
+        console.error("An error occurred:", error);
     }
   }
 
